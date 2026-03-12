@@ -15,11 +15,11 @@ engine: knitr
 
 Prepare these exercises before coming to class. Plan to spend 45 minutes on these exercises.
 
-::: {.callout-important title = "Switch on the `eval` flag when you want to evaluate code!"}
+::: {.callout-important title = "Switch the `eval` flag to TRUE when you want to evaluate code!"}
 In the R code chunks below we have provided starter code for you to work from.
 We have set the key `eval` to the value `false` so that they are not run because they have syntax such as `YOUR_VALUE_HERE` which would generate errors.
 
-Switch the `eval` value to `true` when you want the R code within a chunk to be run when you compile your document.
+Switch the `eval` value to `TRUE` when you want the R code within a chunk to be run when you compile your document.
 :::
 
 <!-- END INSERT:prepare-header -->

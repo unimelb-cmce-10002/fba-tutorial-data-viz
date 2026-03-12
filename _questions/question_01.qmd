@@ -1,62 +1,33 @@
 <!-- question-type: prepare -->
-### Exercise 1: Plotting Number of Listings by Region
+### Exercise 1: Understanding `ggplot2` Syntax
 
-By the end of this exercise, your plot should look similar to this one:
+Consider the code below:
 
 ```{r}
-#| fig-width: 5
-#| fig-height: 5
-#| fig-align: "center"
-#| echo: false
+#| eval: false
 
 ggplot(housing, 
        aes(x = regionname)
        ) +
-    geom_bar() +
-    labs(x = "Region", 
-         y = "Frequency", 
-         title = "Number of Listings by Region"
-         ) +
-    theme(
-        axis.text.x = element_text(angle = 25, hjust = 1),
-    )
+  geom_bar() +
+  labs(
+    x = "Region",
+    y = "Count",
+    title = "Number of Listings by Region"
+  )
 ```
 
+**(a)** What does `ggplot(housing, aes(x = regionname))` do?
 
-**(a).** If you were a real estate investor or city planner, why would knowing the number of listings by region be valuable? What decisions could be influenced by this visualization?
+**(b)** What is the role of `aes(x = regionname)` in this code?
 
-**(b).** Use the starter code below to create a first version of the bar plot. Replace `YOUR_VARIABLE_NAME` with the appropriate variable name from the dataset.
+**(c)** What does `geom_bar()` add to the plot?
 
-:::{.callout-tip title="What is a Bar Plot?" collapse = "true"}
-A **bar plot** is a graphical representation of categorical data, where each category is represented by a bar whose height reflects its frequency or proportion. It is commonly used to compare counts across different groups, making it easy to identify the most and least common categories in a dataset. In business and research, bar plots help visualize trends, distributions, and key differences in data at a glance.
-:::
+**(d)** What does `labs()` do?
 
-```{r}
-#| eval: false
-ggplot(housing, 
-       aes(x = YOUR_VARIABLE_NAME)
-       ) +
-    geom_bar()
-```
+**(e)** In this code, what does the `+` operator do?
 
-**(c).** Extend the plot above by adding labels to the x-axis, y-axis, and title. Use the `labs()` function to add these labels. The code below also rotates the axis labels by 25 degrees to improve readability.
-
-```{r}
-#| eval: false
-ggplot(housing, 
-       aes(x = YOUR_VARIABLE_NAME)
-       ) +
-    geom_bar() +
-    labs(x = "YOUR_X_AXIS_LABEL", 
-         y = "YOUR_Y_AXIS_LABEL", 
-         title = "YOUR_TITLE"
-         ) +
-    theme(
-        axis.text.x = element_text(angle = 25, hjust = 1),
-    )
-```
-
-**(d).** What patterns do you notice in the number of listings? Are certain regions overrepresented or underrepresented? How might this affect housing supply and pricing? 
+**(f)** Run the code above to produce the bar plot.
 
 <!-- BEGIN PROFILE:r-teaching-guide -->
 ::: {.content-visible when-profile="r-teaching-guide"}
@@ -69,33 +40,34 @@ Teaching Note
 
 ::: {.teaching-block-body}
 
-🎯 **Learning Objective** 
-Students should:
+🎯 **Learning Objective**
+    
+Students should be able to identify the main building blocks of a simple `ggplot2` command and explain how a plot is constructed step by step.
 
-- Learn how to create a bar plot using ggplot2 to display frequency of a categorical variable
-- Apply basic plot customizations using `labs()`
-- Begin interpreting data distributions and considering real-world implications
+✅ **Core Concepts to Highlight**
+    
+* **`ggplot()` starts the plot**: It sets up the plotting object.
+* **Data**: `housing` is the dataset being used.
+* **Aesthetic mapping**: `aes(x = regionname)` maps a variable in the data to a visual feature of the plot.
+* **Geometry**: `geom_bar()` tells `ggplot2` to draw bars.
+* **Labels**: `labs()` adds descriptive text such as axis labels and a title.
+* **Layering with `+`**: `ggplot2` plots are built by adding components together one layer at a time.
 
-
-✅   **Core Concepts to Highlight**
-
-- Bar plots show frequency counts of categorical variables
-- `geom_bar()` uses the count of rows in each category by default
-- The `aes(x = regionname)` maps the variable to the x-axis
-- `labs()` is used to add informative axis labels and a title
-- Interpretation connects visual patterns to business context (e.g. supply, market activity)
-
-
-💬 **Suggested In-Class Prompts** (if needed)
-
-NA
-
+💬 **Suggested In-Class Prompts**
+    
+* What part of this code chooses the data?
+* What part tells R what should go on the x-axis?
+* Would this code draw anything if we removed `geom_bar()`?
+* Why do we need the `+` operator in `ggplot2`?
+* What changes if we edit `labs()`? What stays the same?
+    
 📌 **Common Misunderstandings**
+    
+* Students may think `ggplot()` by itself already draws the final graph. Emphasize that it sets up the plot, but the `geom_` layer is what actually draws something.
+* Students may confuse `aes()` with labels. Clarify that `aes()` maps variables from the data, while `labs()` changes descriptive text shown on the figure.
+* Students may not understand the `+` operator as part of a layered grammar. Stress that each `+` adds a new piece to the same plot.
+* Some students may think `geom_bar()` requires them to manually count observations first. Clarify that `geom_bar()` automatically counts categories by default.
 
-- Confusing `geom_bar()` (which counts observations) with `geom_col()` (which uses values)
-- Using the wrong variable in `aes(x = ...)` — e.g. numeric instead of categorical
-- Assuming more listings = better opportunities, without thinking about demand
-- Misinterpreting the y-axis — it's count of rows, not price or square meters
 
 :::
 
@@ -115,58 +87,33 @@ Solution
 
 ::: {.solution-block-body}
 
-**(a). Why is this information valuable to real estate investors or city planners?**
+**(a)** `ggplot(housing, aes(x = regionname))` starts a plot using the housing dataset and maps the variable `regionname` to the x-axis.
 
-Knowing the number of listings by region helps real estate investors identify which areas have a large housing supply, suggesting more opportunities to buy or sell. For city planners, it gives insight into regional activity and potential infrastructure or zoning needs. For example:
+**(b)** `aes(x = regionname)` defines the aesthetic mapping. It tells ggplot2 which variable from the dataset should be shown on the x-axis.
 
-- A region with many listings might signal high development or turnover.
-- A region with few listings might suggest limited availability or less desirability, or that it is mostly owner-occupied.
-- Investors may use this to target areas with more competition (supply) or fewer listings (scarcity).
-- City planners might use it to anticipate demand for transport, utilities, or amenities.
+**(c)** `geom_bar()` adds bars to the plot. It creates a bar plot that counts how many observations fall into each category of regionname.
 
-NOTE: this is not the only correct answer to this question.
+**(d)** `labs()` adds or changes labels on the plot, such as the x-axis label, y-axis label, and title.
 
-**(b). Starter code with correct variable name**
+**(e)** The `+` operator adds new layers or components to the plot. In ggplot2, we build plots step by step by adding pieces together.
 
-The variable we want on the x-axis is regionname. Here's the updated code:
+**(f)** When you run the code, it produces a bar plot showing the number of listings in each region.
 
 ```{r}
+#| eval: true
+#| echo: false
+
 ggplot(housing, 
        aes(x = regionname)
        ) +
-    geom_bar()
+  geom_bar() +
+  labs(
+    x = "Region",
+    y = "Count",
+    title = "Number of Listings by Region"
+  )
 ```
 
-**(c). Extended version with labels and rotated axis text**
-
-```{r}
-ggplot(housing, 
-       aes(x = regionname)
-       ) +
-    geom_bar() +
-    labs(
-        x = "Region", 
-        y = "Number of Listings", 
-        title = "Number of Listings by Region"
-    ) +
-    theme(
-        axis.text.x = element_text(angle = 25, hjust = 1)
-    )
-```
-
-**(d)**
-
-From the plot, we can see several clear patterns:
-
-- Northern Metro and Southern Metro have the highest number of listings
-- South-East Metro has the fewest listings
-- Western Metro is also highly active, with nearly as many listings as the Northern and Southern regions.
-Eastern Metro has moderate activity.
-
-(possible) Interpretation:
-
-- The uneven distribution of listings suggests that some regions (e.g., South-East Metro) may have limited housing supply, while others (e.g., Northern and Southern Metro) are more active markets.
-- This can affect pricing dynamics — high-supply regions may offer more choice and competition, while low-supply areas could see rising prices due to scarcity.
 
 :::
 

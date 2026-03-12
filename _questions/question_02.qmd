@@ -10,25 +10,17 @@ By the end of this exercise, your plot should look similar to this one:
 #| echo: false
 
 housing |>
-    ggplot(aes(x = price, 
-               fill = type)
+    ggplot(aes(x = price)
            ) +
     geom_histogram(bins = 50) +
-    # Natural log scale for x-axis with meaningful breaks
-    scale_x_continuous(
-        labels = scales::dollar,
-    ) +
     labs(x = "Price", 
          y = "Density within Type", 
          title = "Prices by Dwelling Type"
          ) + 
-    theme(
-        axis.text.x = element_text(angle = 55, hjust = 1),
-    ) +
     facet_wrap(~ type)
 ```
 
-**(a).** Why is a histogram useful for understanding price distributions? What insights can we gain from plotting price distributions separately for each dwelling type?
+**(a)** Why is a histogram useful for understanding price distributions? What insights can we gain from plotting price distributions separately for each dwelling type?
 
 :::{.callout-tip title="What is a Histogram?" collapse=true}
 A **histogram** is a visualization that represents the **distribution of numerical data** by dividing values into bins and counting the number of observations in each bin. Unlike a bar plot, which displays **categorical data**, a histogram is used for **continuous variables** like price, age, or distance.
@@ -37,7 +29,7 @@ Histograms help identify **patterns** in data, such as **skewness, outliers, and
 :::
 
 
-**(b).** Use the starter code below to create a basic histogram of house prices. Replace `YOUR_VARIABLE_NAME` with the correct variable.
+**(b)** Use the starter code below to create a basic histogram of house prices. Replace `YOUR_VARIABLE_NAME` with the correct variable.
 
 ```{r}
 #| eval: false
@@ -47,7 +39,7 @@ ggplot(housing,
     geom_histogram(bins = 50)
 ```
 
-**(c).** Extend the plot above by adding labels to the x-axis, y-axis, and title using the labs() function.
+**(c)** Extend the plot above by adding labels to the x-axis, y-axis, and title using the `labs()` function.
 
 ```{r}
 #| eval: false
@@ -61,7 +53,7 @@ ggplot(housing,
          )
 ```
 
-**(d).** Modify the x-axis so that prices are displayed in dollar format by adding `scale_x_continuous(labels = scales::dollar).` We have rotated the axis labels to make the numbers easier to read.
+**(d)** Modify the plot so that you create separate histograms for each dwelling type by adding the `facet_wrap(~type)` layer to the plot
 
 ```{r}
 #| eval: false
@@ -70,38 +62,15 @@ ggplot(housing,
        aes(x = price)
        ) +
     geom_histogram(bins = 50) +
-    YOUR_CODE_HERE +
     labs(x = "YOUR_X_AXIS_LABEL", 
          y = "YOUR_Y_AXIS_LABEL", 
          title = "YOUR_TITLE"
-         ) +
-    theme(
-        axis.text.x = element_text(angle = 55, hjust = 1),
-    )
-```
-
-**(e).** Add `fill = type` inside `aes()` to color the histogram by dwelling type and then create subplots by dwelling type.
-
-```{r}
-#| eval: false
-ggplot(housing, 
-       aes(x = price, 
-           YOUR_CODE_HERE
-           )
-       ) +
-    geom_histogram(bins = 50) +
-    YOUR_CODE_HERE +
-    labs(x = "YOUR_X_AXIS_LABEL", 
-         y = "YOUR_Y_AXIS_LABEL", 
-         title = "YOUR_TITLE"
-         ) +
-    theme(
-        axis.text.x = element_text(angle = 55, hjust = 1),
-    ) +
+         ) 
     YOUR_CODE_HERE
 ```
 
-**(f).** What does the histogram tell you about price differences between dwelling types?
+
+**(e)** What does the histogram tell you about price differences between dwelling types?
 
 
 <!-- BEGIN PROFILE:r-teaching-guide -->
@@ -127,8 +96,7 @@ Students should:
 
 - A histogram is for continuous data; bar plots are for categorical data
 - `geom_histogram()` counts how many values fall into each bin
-- `fill = type` adds color by category, while `facet_wrap(~ type)` breaks plots into small multiples
-- `scale_x_continuous(labels = scales::dollar)` improves readability of financial data
+- `facet_wrap(~ type)` breaks plots into small multiples
 - Distribution shape tells us about central tendency, spread, and skewness, all of which matter for pricing and segmentation
 
 💬 **Suggested In-Class Prompts** (if needed)
@@ -193,40 +161,22 @@ ggplot(housing,
 ```
 
 **(d)**
+
 ```{r}
 ggplot(housing, 
        aes(x = price)
        ) +
     geom_histogram(bins = 50) +
-    scale_x_continuous(labels = scales::dollar) +
     labs(
         x = "Price", 
         y = "Number of Listings", 
         title = "Distribution of Dwelling Prices"
     ) +
-    theme(
-        axis.text.x = element_text(angle = 55, hjust = 1)
-    )
-```
-
-```{r}
-ggplot(housing, 
-       aes(x = price, fill = type)
-       ) +
-    geom_histogram(bins = 50) +
-    scale_x_continuous(labels = scales::dollar) +
-    labs(
-        x = "Price", 
-        y = "Density within Type", 
-        title = "Prices by Dwelling Type"
-    ) +
-    theme(
-        axis.text.x = element_text(angle = 55, hjust = 1)
-    ) +
     facet_wrap(~ type)
+
 ```
 
-**(f)**
+**(e)**
 
 The histogram reveals clear differences in price distributions across dwelling types:
 
