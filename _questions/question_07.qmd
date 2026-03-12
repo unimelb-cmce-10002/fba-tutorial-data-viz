@@ -1,14 +1,13 @@
 <!-- question-type: inclass -->
 ### Exercise 7: Putting the plots together
 
-**(a).** Use the code below to combine the plots for the three exercises above. Replace `PLOT_ONE`, `PLOT_TWO`, and `PLOT_THREE` with the plots you created in Exercises 5, 6, and 7.
+**(a).** Use the code below to combine the plots from the exercises above. Replace `PLOT_ONE`, `PLOT_TWO`, and `PLOT_THREE` with the plots you created in Exercises 4, 5, and 6.
 
 ```{r}
 #| eval: false
 PLOT_ONE /    
-    (PLOT_TWO | PLOT_THREE) + 
-    plot_layout(guides = "collect") & 
-    theme(legend.position = "bottom")
+    (PLOT_TWO | PLOT_THREE) & 
+    theme(legend.position = "none")
 ```
 
 **(b).** Save this combined plot as a PDF file using the `ggsave()` function. You can specify the file name and dimensions using the `filename` and `width` and `height` arguments.
@@ -42,8 +41,7 @@ Students should:
 - The {patchwork} package (built into recent versions of ggplot2) uses simple symbols:
     - `/` stacks plots vertically
     - `|` places plots side-by-side
-- `plot_layout(guides = "collect")` helps align legends across the full layout
-- & `theme(...)` applies a consistent theme tweak to all plots in the layout
+- `theme(legend.position = "none")` removes an unnecessary legend
 - `ggsave()` exports a plot to file — emphasize file name and dimensions are key
 List them here
 
@@ -61,7 +59,6 @@ List as needed
 
 📌 **Common Misunderstandings**
 
-- Confusing plot_layout() with a plotting function — clarify it's part of the combination chain
 - Overwriting plots accidentally or misnaming them in the final composition
 - Saving with a file extension other than .pdf without adjusting output type
 

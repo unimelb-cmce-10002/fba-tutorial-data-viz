@@ -1,11 +1,11 @@
 <!-- question-type: inclass -->
-### Exercise 4: Improving the Listings by Region Plot
+### Exercise 4: Improving the Price Distribution Plot
 
-**(a).** Together with your peers, propose three changes you want to make to the plot in Exercise 1. Discuss the rationale behind each change and how it might improve the visualization.
+**(a).** Together with your peers, propose three changes you want to make to the plot in Exercise 2. Discuss the rationale behind each change and how it might improve the visualization.
 
 **(b).** Work with your tutor to create an agreed upon list of changes to make to the plot. What steps do you need to take to make these improvements?
 
-**(c).** Implement the changes suggested in the R.
+**(c).** Implement the changes suggested in the R code.
 
 <!-- BEGIN PROFILE:r-teaching-guide -->
 ::: {.content-visible when-profile="r-teaching-guide"}
@@ -21,40 +21,41 @@ Teaching Note
 🎯 **Learning Objective** 
 Students should:
 
-- Critically evaluate and improve a basic bar plot using best practices in data visualization
-- Implement proportional comparisons, reordering of categories, and audience-driven filtering
-- Deepen their understanding of ggplot2 internals, especially `after_stat()` behavior in `geom_bar()`
+- Refine a histogram-based visualization to better communicate distributional differences
+- Understand why log scales are helpful for skewed price data
+- Recognize and apply proportional y-axis scaling in faceted plots
+- Incorporate accessibility-aware color palettes
 
 ✅   **Core Concepts to Highlight**
 
-- Piping (`|>`) allows students to chain together multiple steps in a clear, readable sequence
-    - This is their first exposure — emphasize that it’s used to “pass” the result of one step into the next
-    - Example: `housing |> filter(...) |> ggplot(...)` reads as a logical sequence of actions
-- Filtering by dwelling type (e.g., "House") sharpens the message by reducing noise and focusing on a meaningful subset
-- Reordering bars using fct_infreq() displays categories from most to least common, making comparisons intuitive
-- Proportions on the y-axis improve interpretability, especially when raw counts vary in scale — but require extra care to calculate within geom_bar()
-- `after_stat(count)` lets us access the default computed statistic (the count of rows)
-- `after_stat(count) / sum(after_stat(count)`) computes the proportion of each bar relative to the entire set of visible bars, not the whole dataset — this line is non-obvious and worth unpacking live
+NOTE: Make this line of code available to students and explain what it means -- remind them they dont need to know it themselves ("We’re introducing more complex ggplot tools here — don’t stress about the syntax yet, focus on what the chart shows and how small changes help us tell a clearer story.")
+
+```r
+aes(y = after_stat(count) / 
+     tapply(after_stat(count), after_stat(PANEL), sum)[after_stat(PANEL)])
+```
+- Skewed distributions like housing prices often benefit from a log-transformed x-axis to reveal patterns in lower price brackets
+- Proportions, rather than raw counts, are helpful when comparing multiple groups (facets), especially if group sizes differ
+- after_stat(count) / ... computes within-facet proportions — we won’t unpack the full syntax yet, but students should understand the concept:  “We’re dividing each bar height by the total number of listings for that dwelling type, so the height shows the share of that type’s listings in each price range.”
+- Color palettes like `scale_fill_okabe_ito()` ensure plots are clear for all readers — including those with color vision deficiencies
 
 💬 **Suggested In-Class Prompts** (if needed)
 
+“What does using a log x-axis reveal that the original plot might hide?”
 
-“What does filtering to Houses change about the story this plot tells?”
+“How does changing to proportions shift the way we interpret the differences across dwelling types?”
 
-“Why might we want to show proportions instead of counts?”
+“Why might counts be misleading when the number of houses and apartments differ?”
 
-“What would happen if we didn’t use after_stat() here? What warning might we see?”
-
-“Does this plot make you think differently about which regions are most active?”
-
-“When might we want to show counts instead of proportions?”
+“What would happen if we removed faceting and used color alone to distinguish types?”
+List as needed
 
 📌 **Common Misunderstandings**
 
-- Misusing `stat = "identity"` in `geom_bar()` instead of working with the default stat (count) — in this context, we want `stat = "count"` (the default), then adjust the output with `after_stat()`
-- Thinking `fct_infreq()` changes the data itself — it only affects display order, not values
-- Forgetting that proportions are always relative to what’s visible — if you filter first, proportions refer to the filtered subset, not the full dataset
-- Believing that adding many tweaks automatically improves a plot — remind students to justify each choice
+- Students may believe log scales change the data, not just the display
+- Assuming y-axis values are still raw counts when they’ve become proportions — emphasize interpretation
+- Confusing the technical implementation of `after_stat(...)` with something they are expected to write themselves — reassure them it’s a premade component for now
+- Thinking accessibility features like color palettes are optional or cosmetic — emphasize their importance for real-world communication
 
 :::
 
@@ -75,37 +76,39 @@ Solution
 ::: {.solution-block-body}
 
 ```{r}
-# Solution: Focus on Houses, use proportions, order bars, and center title
-region_bar <- 
-  housing |>
-  # 1. Filter to only include "House" listings
-  filter(type == "House") |>
-  # 2. Create the plot
-  ggplot(
-    # 2a. Reorder the region names based on frequency
-    aes(x = fct_infreq(regionname))
-  ) +
-  # 3. Plot bar heights as proportions, not raw counts
-  geom_bar(
-    aes(y = after_stat(count) / sum(after_stat(count))),
-    fill = palette_okabe_ito()[2]
-  ) +
-  # 4. Add informative axis labels and a title
-  labs(
-    x = "Region", 
-    y = "Frequency",  # Note: this is technically a proportion, not % format
-    title = "Number of Listings by Region"
-  ) +
-  # 5. Tweak the theme for better readability and presentation
-  theme(
-    axis.text.x = element_text(angle = 25, hjust = 1),  # Rotate x labels
-    plot.title = element_text(hjust = 0.5)              # Center the title
-  )
+# Improved histogram of price by dwelling type
+price_hist <- 
+    ggplot(housing,
+           aes(x = price, fill = type)
+           ) +
+    geom_histogram(
+        bins = 50
+    ) +
+    # Log-scale the x-axis to handle price skew
+    scale_x_continuous(
+        trans = "log10",
+        labels = scales::dollar
+    ) +
+    # Add labels and title
+    labs(
+        x = "Price", 
+        y = "Number of Listings", 
+        title = "Prices by Dwelling Type"
+    ) +
+    # Create separate plots for each dwelling type
+    facet_wrap(~type) +
+    # Rotate x-axis labels for readability
+    theme(axis.text.x = element_text(angle = 55, hjust = 1)) +
+    # Use colorblind-friendly fill palette
+    scale_fill_okabe_ito() +
+    theme_bw() +
+    # Center the title
+    theme(
+        plot.title = element_text(hjust = 0.5)
+    )
 
-region_bar
+price_hist
 ```
-
-
 :::
 
 :::

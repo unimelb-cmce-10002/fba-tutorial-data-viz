@@ -1,7 +1,7 @@
 <!-- question-type: inclass -->
-### Exercise 6: Improving the Price-Distance Relationship Plot
+### Exercise 6 [Optional, if time]: Improving the Listings by Region Plot
 
-**(a).** Together with your peers, propose three changes you want to make to the plot in Exercise 3. Discuss the rationale behind each change and how it might improve the visualization.
+**(a).** Together with your peers, propose two changes you want to make to the plot in Exercise 1. Discuss the rationale behind each change and how it might improve the visualization.
 
 **(b).** Work with your tutor to create an agreed upon list of changes to make to the plot. What steps do you need to take to make these improvements?
 
@@ -21,35 +21,32 @@ Teaching Note
 🎯 **Learning Objective** 
 Students should:
 
-- Interpret a nonlinear trend (polynomial regression) to better describe curved relationships in data
-- Learn to modify `geom_smooth()` to fit more flexible models
+- Evaluate and improve a basic bar plot using best practices in data visualization
+- **ADVANCED**: Implement proportional comparisons, reordering of categories
+- **ADVANCED**: Deepen their understanding of ggplot2 internals, especially `after_stat()` behavior in `geom_bar()`
 
 ✅   **Core Concepts to Highlight**
 
-- Filtering by dwelling type (e.g., type == "House") narrows the focus and makes patterns easier to interpret
-- Switching from a linear fit to a nonlinear polynomial fit lets the trend line bend, better matching the shape of the data
-    - Specifically, formula = y ~ poly(x, 2) fits a curved line — not just a straight diagonal
-    - You can explain this to students as: “We’re asking R to draw a line that gently curves to follow the pattern, not just drop in a straight line. It’s like letting the line have one bend — often that’s enough to tell a more realistic story.”
-    - They don’t need to understand the math behind the polynomial — focus on the intuition: it captures more nuance than a straight line
-    - If you feel comfortable doing so, link back to a quadatric function -- which is what this is
-- Using consistent, accessible colors (e.g., from okabe_ito()) ensures better readability and equity. and we pick the color from the faceted histo to match!
+- Reordering bars using `fct_infreq()` displays categories from most to least common, making comparisons intuitive
+- **ADVANCED**: Proportions on the y-axis improve interpretability, especially when raw counts vary in scale — but require extra care to calculate within `geom_bar()`
+- **ADVANCED**: `after_stat(count)` lets us access the default computed statistic (the count of rows)
+- **ADVANCED**: `after_stat(count) / sum(after_stat(count)`) computes the proportion of each bar relative to the entire set of visible bars, not the whole dataset — this line is non-obvious and worth unpacking live
 
 💬 **Suggested In-Class Prompts** (if needed)
 
-“Why does focusing only on Houses help here?”
+“Why might we want to show proportions instead of counts?”
 
-“What do we gain by switching to a nonlinear fit?”
+“What would happen if we didn’t use `after_stat()` here? What warning might we see?”
 
-“Does the curvature match what you expected about price and distance?”
+“Does this plot make you think differently about which regions are most active?”
 
-“What would happen if we showed all dwelling types together — or compared them separately?” 
+“When might we want to show counts instead of proportions?”
 
 📌 **Common Misunderstandings**
 
-- Believing that polynomial fits overfit or are “cheating” — clarify that they're simply more flexible models
-- Forgetting to filter before plotting, which leads to noisy, multi-type data making the trend unclear
-- Not understanding `poly(x, 2)` — remind students they don’t need to write polynomial code themselves yet, just understand the shape
-- Confusing aesthetic improvements (e.g., color, centered title) with analytical ones — both matter, but for different reasons
+- Thinking `fct_infreq()` changes the data itself — it only affects display order, not values
+- Misusing `stat = "identity"` in `geom_bar()` instead of working with the default stat (count) — in this context, we want `stat = "count"` (the default), then adjust the output with `after_stat()`
+
 :::
 
 :::
@@ -68,36 +65,36 @@ Solution
 
 ::: {.solution-block-body}
 
-
 ```{r}
-# Improved scatterplot: price vs. distance for Houses only, with nonlinear trend
-scttr <-
-  housing |>
-  filter(type == "House") |>
-  ggplot(aes(x = distance, y = price)) +
-  # Scatter plot with reduced alpha to handle overplotting
-  geom_point(alpha = 0.05, color = palette_okabe_ito()[2]) +
-  # Polynomial fit to capture curvature (not just a straight line)
-  geom_smooth(
-    method = "lm",
-    formula = y ~ poly(x, 2),   # Allow one bend in the trend line
-    se = FALSE,
-    color = palette_okabe_ito()[6],
-    linewidth = 1
-  ) +
-  # Format y-axis as dollars
-  scale_y_continuous(labels = scales::dollar) +
-  # Add labels and center the title
-  labs(
-    x = "Distance to CBD (km)",
-    y = "Price",
-    title = "House Price vs. Distance"
-  ) +
-  theme(
-    plot.title = element_text(hjust = 0.5)
-  )
+# Solution:  use proportions, order bars, and center title
+region_bar <- 
+    # 2. Create the plot
+    ggplot(housing,
+        # 2a. Reorder the region names based on frequency
+        aes(x = fct_infreq(regionname))
+    ) +
+    # 3. Plot bar heights as proportions, not raw counts
+    geom_bar(
+      # THIS BIT IS HARD
+      # YOU CAN NOT USE IT AND KEEP Y AXIS AS COUNTS
+        aes(y = after_stat(count) / sum(after_stat(count))),
+        fill = "grey"
+    ) +
+    # 4. Add informative axis labels and a title
+    labs(
+        x = "Region", 
+        y = "Frequency",  # Note: this is technically a proportion, not % format
+        title = "Number of Listings by Region"
+    ) +
+  # 5. Tweak the theme for better readability and presentation
+    scale_y_continuous(labels = scales::percent) +
+    theme_bw() +
+    theme(
+        axis.text.x = element_text(angle = 25, hjust = 1),  # Rotate x labels
+        plot.title = element_text(hjust = 0.5)              # Center the title
+    )
 
-scttr
+region_bar
 ```
 
 
