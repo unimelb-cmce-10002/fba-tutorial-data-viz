@@ -13,3 +13,5 @@
 *student.qmd
 
 data/*
+
+**/*.quarto_ipynb
