@@ -28,12 +28,6 @@ Students should:
 
 ✅   **Core Concepts to Highlight**
 
-NOTE: Make this line of code available to students and explain what it means -- remind them they dont need to know it themselves ("We’re introducing more complex ggplot tools here — don’t stress about the syntax yet, focus on what the chart shows and how small changes help us tell a clearer story.")
-
-```r
-aes(y = after_stat(count) / 
-     tapply(after_stat(count), after_stat(PANEL), sum)[after_stat(PANEL)])
-```
 - Skewed distributions like housing prices often benefit from a log-transformed x-axis to reveal patterns in lower price brackets
 - Proportions, rather than raw counts, are helpful when comparing multiple groups (facets), especially if group sizes differ
 - after_stat(count) / ... computes within-facet proportions — we won’t unpack the full syntax yet, but students should understand the concept:  “We’re dividing each bar height by the total number of listings for that dwelling type, so the height shows the share of that type’s listings in each price range.”
@@ -43,18 +37,12 @@ aes(y = after_stat(count) /
 
 “What does using a log x-axis reveal that the original plot might hide?”
 
-“How does changing to proportions shift the way we interpret the differences across dwelling types?”
-
-“Why might counts be misleading when the number of houses and apartments differ?”
-
 “What would happen if we removed faceting and used color alone to distinguish types?”
 List as needed
 
 📌 **Common Misunderstandings**
 
 - Students may believe log scales change the data, not just the display
-- Assuming y-axis values are still raw counts when they’ve become proportions — emphasize interpretation
-- Confusing the technical implementation of `after_stat(...)` with something they are expected to write themselves — reassure them it’s a premade component for now
 - Thinking accessibility features like color palettes are optional or cosmetic — emphasize their importance for real-world communication
 
 :::
@@ -74,6 +62,26 @@ Solution
 :::
 
 ::: {.solution-block-body}
+
+**(a) and (b)**. 
+
+Non exhaustive list of potential changes: 
+
+Analytical changes
+
+* adding fill = type
+* applying the log scale
+
+presentation changes:
+
+* rotated axis text
+* color palette
+* theme_bw()
+* centered title
+
+Some changes improve the substance of comparison, while others improve clarity and communication.
+
+**(c)**
 
 ```{r}
 # Improved histogram of price by dwelling type
@@ -97,11 +105,10 @@ price_hist <-
     ) +
     # Create separate plots for each dwelling type
     facet_wrap(~type) +
-    # Rotate x-axis labels for readability
-    theme(axis.text.x = element_text(angle = 55, hjust = 1)) +
     # Use colorblind-friendly fill palette
     scale_fill_okabe_ito() +
-    theme_bw() +
+    theme_bw() +    # Rotate x-axis labels for readability
+    theme(axis.text.x = element_text(angle = 55, hjust = 1)) +
     # Center the title
     theme(
         plot.title = element_text(hjust = 0.5)

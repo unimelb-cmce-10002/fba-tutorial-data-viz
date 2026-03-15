@@ -51,16 +51,31 @@ Solution
 
 ::: {.solution-block-body}
 
+**(a) and (b)**
+
+**Analytical structure mostly unchanged**
+
+* same variables on the axes
+* same scatterplot
+* same transparency level
+* same linear fitted line
+
+Non exhaustive list of potential changes focussed around presentation improvements
+
+* clearer color contrast between points and line
+* easier-to-read price axis
+* more polished theme and title formatting
+
+**(c)**
 
 ```{r}
-# Improved scatterplot: price vs. distance for Houses only, with nonlinear trend
+# Improved scatterplot: price vs. distance
 scttr <-
     ggplot(housing,
            aes(x = distance, y = price)
            ) +
      # Scatter plot with reduced alpha to handle overplotting
     geom_point(alpha = 0.05, color = "grey") +
-    # Polynomial fit to capture curvature (not just a straight line)
     geom_smooth(
         method = "lm",
         se = FALSE,

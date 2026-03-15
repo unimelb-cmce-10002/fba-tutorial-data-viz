@@ -81,11 +81,12 @@ Solution
 ::: {.solution-block-body}
 
 ```{r}
+# (a)
 # Combine them into one layout
-combined_plot <- price_hist / (region_bar | scttr) + 
-  plot_layout(guides = "collect") & 
-  theme(legend.position = "bottom")
+combined_plot <- price_hist / (region_bar | scttr) & 
+    theme(legend.position = "none")
 
+# (b)
 # Save the combined plot
 ggsave("combined_price_plots.pdf", plot = combined_plot, width = 12, height = 8)
 ```

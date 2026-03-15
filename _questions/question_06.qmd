@@ -63,6 +63,25 @@ Students should:
 Solution
 :::
 
+**(a) and (b)**
+
+Here the biggest improvement is analytical rather than technical
+
+Analytical changes
+
+* ordering bars by frequency
+* showing proportions instead of counts
+
+Presentation changes
+
+* colored fill
+* percent labels
+* rotated axis text
+* theme_bw()
+* centered title
+
+**(c)**
+
 ::: {.solution-block-body}
 
 ```{r}
@@ -83,7 +102,7 @@ region_bar <-
     # 4. Add informative axis labels and a title
     labs(
         x = "Region", 
-        y = "Frequency",  # Note: this is technically a proportion, not % format
+        y = "Proportion of Listings",  # Note: this is technically a proportion, not % format
         title = "Number of Listings by Region"
     ) +
   # 5. Tweak the theme for better readability and presentation

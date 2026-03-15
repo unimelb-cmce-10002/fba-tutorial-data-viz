@@ -19,22 +19,36 @@ Teaching Note
 ::: {.teaching-block-body}
 
 🎯 **Learning Objective** 
+
 Students should:
 
-- XXXXX
+- practise turning visual results into a clear business-facing summary
+- distinguish between describing what a plot shows and interpreting why it might matter
+- connect descriptive findings to possible business decisions without overstating what the analysis can prove
 
-✅   **Core Concepts to Highlight**
+✅ **Core Concepts to Highlight**
 
-List them here
+- **Synthesis across plots**: Students should bring together evidence from multiple visualizations rather than discussing each in isolation.
+- **Descriptive interpretation**: The plots help summarize patterns in the data, such as differences across dwelling types, regions, and locations.
+- **Decision relevance**: Good business communication links findings to possible actions or decisions.
+- **Limits of visualization**: These plots show patterns and associations, but they do not by themselves establish causal effects.
+- **Audience awareness**: A business meeting summary should be concise, structured, and focused on what matters for decision-making.
 
+💬 **Suggested In-Class Prompts**
 
-💬 **Suggested In-Class Prompts** (if needed)
-
-List as needed
+- If you had only 30 seconds in a meeting, what are the two or three most important points you would say?
+- Which of these findings would matter most to a buyer, investor, or planner?
+- What is the difference between saying “prices are lower further from the CBD” and saying “distance causes lower prices”?
+- Which plot gave the clearest business insight, and why?
+- What decision could someone make from these results, and what extra information would they still need?
 
 📌 **Common Misunderstandings**
 
-List as needed
+- Students may simply describe each plot one by one without synthesizing the broader story across them.
+- Students may overclaim causality, especially when discussing distance and price.
+- Students may focus only on technical plot features rather than the business meaning of the findings.
+- Students may suggest decisions that go beyond what the descriptive evidence can support.
+- Students may forget to mention what data and variables were analyzed before jumping to conclusions.
 
 :::
 
