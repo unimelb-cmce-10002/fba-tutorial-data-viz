@@ -72,28 +72,26 @@ Here’s one possible (long) answer:
 
 **What We Looked At**
 
-We analyzed housing listings from Melbourne to explore three key questions:
+We analyzed dwelling listings from Melbourne to explore three key questions:
 
-- Where are houses being listed, and how does this vary by region?
+- Where are dwellings being listed, and how does the volume vary by region?
 - How do prices differ between dwelling types (Houses, Units, Townhouses)?
-- How does distance from the CBD relate to house prices?
+- How does distance from the CBD relate to dwelling prices?
 
 **What We Found** 
 Listing Activity by Region:
 
-- Some metro regions (e.g., Northern and Western Metro) had a larger share of house listings than others. Presenting these as proportions made the comparison clearer, especially for less active regions.
+- Some metro regions (e.g., Northern and Western Metro) had a larger share of listings than others. Presenting these as proportions made the comparison clearer, especially for less active regions.
 
 Price Differences by Dwelling Type:
 
 - Houses had the highest prices on average and the widest spread.
 - Units were more affordable and tightly clustered in price.
-- Townhouses sat in between.
-
-These differences became much clearer when we adjusted for the skew in price data and focused on the shape of each distribution, not just raw numbers.
+- Townhouses sat inbetween.
 
 Price and Distance from the CBD:
 
-- For Houses, prices generally decline as distance increases — but not in a straight line. Prices drop off quickly closer to the CBD, then flatten out. A curved trendline helped us see that nuance.
+- Prices generally decline as distance increases — in a relatively linear way
 
 **What This Helps Us Understand**
 
@@ -101,7 +99,7 @@ These visuals don’t tell us everything, but they provide a starting point for 
 
 - If you're pricing or positioning properties, it's helpful to understand how type and location shape price expectations.
 - Regional variation in listing volume could flag where market activity is strongest — or where supply may be tight. That’s worth exploring further.
-- The price–distance relationship aligns with what we might expect: proximity adds value, but only up to a point. Knowing where that value levels off could inform development or marketing strategies.
+- The price–distance relationship aligns with what we might expect: proximity adds value.
 
 :::
 
