@@ -78,7 +78,8 @@ We analyzed dwelling listings from Melbourne to explore three key questions:
 - How do prices differ between dwelling types (Houses, Units, Townhouses)?
 - How does distance from the CBD relate to dwelling prices?
 
-**What We Found** 
+**What We Found**
+
 Listing Activity by Region:
 
 - Some metro regions (e.g., Northern and Western Metro) had a larger share of listings than others. Presenting these as proportions made the comparison clearer, especially for less active regions.

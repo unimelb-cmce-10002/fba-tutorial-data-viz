@@ -58,15 +58,21 @@ Solution
 * same variables on the axes
 * same scatterplot
 * same transparency level
-* same linear fitted line
 
-Non exhaustive list of potential changes focussed around presentation improvements
+But **we might want to move away from a linear trend line**
+
+Non exhaustive list of **potential changes focussed around presentation improvements**
 
 * clearer color contrast between points and line
 * easier-to-read price axis
 * more polished theme and title formatting
 
 **(c)**
+
+Below we give 3 possible lines for the plot. 
+Based on your discussion with your TA and group, you may have chosen one of these.
+None of these is "more correct" than others, it depends what you want to show.
+We recommend against plotting more than one in the same figure, as its hard for managers to read.
 
 ```{r}
 # Improved scatterplot: price vs. distance
@@ -76,12 +82,34 @@ scttr <-
            ) +
      # Scatter plot with reduced alpha to handle overplotting
     geom_point(alpha = 0.05, color = "grey") +
+    # Here's alternative lines we could use. Pick ONE.
+    # 1. stay linear
     geom_smooth(
         method = "lm",
         se = FALSE,
         color = "coral",
         linewidth = 1
     ) +
+    # # 2. move to non-linear / quadratic 
+    #     "one bend"
+    # geom_smooth(
+    #     method = "lm",
+    #     formula = y ~ poly(x, 2),   # Allow one bend in the trend line
+    #     se = FALSE,
+    #     color = "coral",
+    #     linewidth = 1
+    # ) +
+    # 3. move to something non-parametric
+    # The default is a 'loess' polynomial. "many bends"
+    # inutuitively, think of this as using points in the close neighborhood of each other
+    # to determine the 'local' slope of the line
+    # note that local slope may violate notions of 'correct' theoretical direction of 
+    # relationship
+    # geom_smooth(
+    #     se = FALSE,
+    #     color = "coral",
+    #     linewidth = 1
+    # ) +
     # Format y-axis as dollars
     scale_y_continuous(labels = scales::dollar) +
     # Add labels and center the title
