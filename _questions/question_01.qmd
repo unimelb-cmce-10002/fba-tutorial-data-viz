@@ -1,6 +1,8 @@
 <!-- question-type: prepare -->
 ### Exercise 1: Understanding `ggplot2` Syntax
 
+This first panel will answer the Head of Residential Sales's question of where market activity is concentrated. Before you build it, let's make sure you're comfortable with the `ggplot2` syntax you'll be using throughout this tutorial.
+
 Consider the code below:
 
 ```{r}

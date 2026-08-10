@@ -7,6 +7,8 @@
 
 **(c).** Implement the changes suggested in the R.
 
+**(d)** What's the key takeaway from this panel? In a sentence or two, what does it tell the Head of Residential Sales about where listing activity is concentrated?
+
 <!-- BEGIN PROFILE:r-teaching-guide -->
 ::: {.content-visible when-profile="r-teaching-guide"}
 
@@ -24,6 +26,7 @@ Students should:
 - Evaluate and improve a basic bar plot using best practices in data visualization
 - **ADVANCED**: Implement proportional comparisons, reordering of categories
 - **ADVANCED**: Deepen their understanding of ggplot2 internals, especially `after_stat()` behavior in `geom_bar()`
+- Read a listing-volume pattern as a possible supply signal, not just a demand signal
 
 ✅   **Core Concepts to Highlight**
 
@@ -31,6 +34,7 @@ Students should:
 - **ADVANCED**: Proportions on the y-axis improve interpretability, especially when raw counts vary in scale — but require extra care to calculate within `geom_bar()`
 - **ADVANCED**: `after_stat(count)` lets us access the default computed statistic (the count of rows)
 - **ADVANCED**: `after_stat(count) / sum(after_stat(count)`) computes the proportion of each bar relative to the entire set of visible bars, not the whole dataset — this line is non-obvious and worth unpacking live
+- Low listing counts can reflect supply constraints (limited land, built-out suburbs) rather than low demand — worth flagging as a pricing signal, not just a coverage gap
 
 💬 **Suggested In-Class Prompts** (if needed)
 
@@ -42,10 +46,13 @@ Students should:
 
 “When might we want to show counts instead of proportions?”
 
+“Could a region with few listings be undersupplied rather than low-demand? What would that mean for prices there?”
+
 📌 **Common Misunderstandings**
 
 - Thinking `fct_infreq()` changes the data itself — it only affects display order, not values
 - Misusing `stat = "identity"` in `geom_bar()` instead of working with the default stat (count) — in this context, we want `stat = "count"` (the default), then adjust the output with `after_stat()`
+- In part (d), students may assume low listing volume simply means low demand, without considering supply-side explanations
 
 :::
 
@@ -62,6 +69,8 @@ Students should:
 ::: {.solution-block-header}
 Solution
 :::
+
+::: {.solution-block-body}
 
 **(a) and (b)**
 
@@ -81,8 +90,6 @@ Presentation changes
 * centered title
 
 **(c)**
-
-::: {.solution-block-body}
 
 ```{r}
 # Solution:  use proportions, order bars, and center title
@@ -116,6 +123,7 @@ region_bar <-
 region_bar
 ```
 
+**(d)** Some regions (e.g. Northern, Southern, and Western Metro) account for a disproportionate share of listings, and should presumably be key focus areas for the sales team. Region with few listings don't necessarily signal weak demand: it could reflect genuine supply constraints (limited land, already built-out suburbs), which would tend to push prices up rather than down.
 
 :::
 

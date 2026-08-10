@@ -7,6 +7,8 @@
 
 **(c).** Implement the changes suggested in the R code.
 
+**(d)** What's the key takeaway from this panel? In a sentence or two, what does it tell the Head of Residential Sales about pricing across dwelling types?
+
 <!-- BEGIN PROFILE:r-teaching-guide -->
 ::: {.content-visible when-profile="r-teaching-guide"}
 
@@ -25,6 +27,7 @@ Students should:
 - Understand why log scales are helpful for skewed price data
 - Recognize and apply proportional y-axis scaling in faceted plots
 - Incorporate accessibility-aware color palettes
+- Distinguish between describing what a plot shows and interpreting why it matters to the business
 
 ✅   **Core Concepts to Highlight**
 
@@ -32,18 +35,21 @@ Students should:
 - Proportions, rather than raw counts, are helpful when comparing multiple groups (facets), especially if group sizes differ
 - after_stat(count) / ... computes within-facet proportions — we won’t unpack the full syntax yet, but students should understand the concept:  “We’re dividing each bar height by the total number of listings for that dwelling type, so the height shows the share of that type’s listings in each price range.”
 - Color palettes like `scale_fill_okabe_ito()` ensure plots are clear for all readers — including those with color vision deficiencies
+- A good takeaway links the pattern to what the Head of Residential Sales might do with it (e.g. price by type, not portfolio-wide), not just what the chart shows
 
 💬 **Suggested In-Class Prompts** (if needed)
 
 “What does using a log x-axis reveal that the original plot might hide?”
 
 “What would happen if we removed faceting and used color alone to distinguish types?”
-List as needed
+
+“If you had to give the Head of Residential Sales one sentence about pricing, not a description of the chart, what would it be?”
 
 📌 **Common Misunderstandings**
 
 - Students may believe log scales change the data, not just the display
 - Thinking accessibility features like color palettes are optional or cosmetic — emphasize their importance for real-world communication
+- In part (d), students may describe the chart's technical features (e.g. "the bars are taller on the left") rather than its business meaning — push for what the pattern implies, not just what it shows
 
 :::
 
@@ -116,6 +122,8 @@ price_hist <-
 
 price_hist
 ```
+
+**(d)** Houses have the highest prices and the widest spread, Units are the most affordable and tightly clustered, and Townhouses sit in between. For the Head of Residential Sales, this means pricing conversations should be tailored by dwelling type, and should lean on typical/median prices rather than the average, since all dwelling types have a long tail of expensive outliers pulling the average up.
 :::
 
 :::

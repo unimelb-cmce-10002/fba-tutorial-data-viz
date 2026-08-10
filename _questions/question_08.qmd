@@ -1,11 +1,9 @@
 <!-- question-type: inclass -->
-### Exercise 8: Synthesizing the Findings
+### Exercise 8: A hallway conversation with the Head of
 
-If you were presenting these results in a business meeting, how would you explain the key takeaways? Structure your summary to include:
+You only have ten seconds with the Head of Residential Sales before she moves to her next meeting. You can show her exactly **one** of your three panels.
 
-* What you analyzed (data, variables)
-* What you found (key insights from the visualizations)
-* What decisions could be made based on this information?
+Which panel do you choose, and in one sentence, what do you say about it? Be ready to defend your choice.
 
 <!-- BEGIN PROFILE:r-teaching-guide -->
 ::: {.content-visible when-profile="r-teaching-guide"}
@@ -18,37 +16,32 @@ Teaching Note
 
 ::: {.teaching-block-body}
 
-🎯 **Learning Objective** 
+🎯 **Learning Objective**
 
 Students should:
 
-- practise turning visual results into a clear business-facing summary
-- distinguish between describing what a plot shows and interpreting why it might matter
-- connect descriptive findings to possible business decisions without overstating what the analysis can prove
+- Prioritize under a real constraint, choosing what matters most rather than covering everything.
+- Defend that choice out loud, adapting a finding for a specific, time-pressed audience.
+- Practise concise, business-facing communication: one sentence.
 
 ✅ **Core Concepts to Highlight**
 
-- **Synthesis across plots**: Students should bring together evidence from multiple visualizations rather than discussing each in isolation.
-- **Descriptive interpretation**: The plots help summarize patterns in the data, such as differences across dwelling types, regions, and locations.
-- **Decision relevance**: Good business communication links findings to possible actions or decisions.
-- **Limits of visualization**: These plots show patterns and associations, but they do not by themselves establish causal effects.
-- **Audience awareness**: A business meeting summary should be concise, structured, and focused on what matters for decision-making.
+- **Audience awareness**: a real stakeholder rarely has time for all the detail — a concise, decisive summary is more useful than a complete one.
+- **Prioritization over synthesis**: this exercise isn't about combining all three panels, it's about deciding which one matters most and why. Different groups may reasonably disagree.
+- Each group's choice reveals their priorities as much as the data does — picking the type panel suggests client-facing pricing feels most urgent; picking the region panel suggests sales coverage does.
 
 💬 **Suggested In-Class Prompts**
 
-- If you had only 30 seconds in a meeting, what are the two or three most important points you would say?
 - Which of these findings would matter most to a buyer, investor, or planner?
-- What is the difference between saying “prices are lower further from the CBD” and saying “distance causes lower prices”?
-- Which plot gave the clearest business insight, and why?
-- What decision could someone make from these results, and what extra information would they still need?
+- Which panel gave the clearest business insight, and why?
+- What decision could someone make from the panel you picked, and what extra information would they still need?
+- If two groups picked different panels, are they both defensible, or is one genuinely more important?
 
 📌 **Common Misunderstandings**
 
-- Students may simply describe each plot one by one without synthesizing the broader story across them.
-- Students may overclaim causality, especially when discussing distance and price.
-- Students may focus only on technical plot features rather than the business meaning of the findings.
-- Students may suggest decisions that go beyond what the descriptive evidence can support.
-- Students may forget to mention what data and variables were analyzed before jumping to conclusions.
+- Students may hedge and refuse to commit to just one panel — push them to choose, that's the point of the exercise.
+- Students may restate the chart's technical features rather than giving a business-facing pitch — a sentence like "the bars are ordered by frequency" isn't a takeaway.
+- Students may treat the choice as arbitrary rather than defending it — press for the reasoning, not just the pick.
 
 :::
 
@@ -68,39 +61,11 @@ Solution
 
 ::: {.solution-block-body}
 
-Here’s one possible (long) answer:
+There's no single correct choice here. The strongest responses are clear and specific. Example pitches for each panel:
 
-**What We Looked At**
-
-We analyzed dwelling listings from Melbourne to explore three key questions:
-
-- Where are dwellings being listed, and how does the volume vary by region?
-- How do prices differ between dwelling types (Houses, Units, Townhouses)?
-- How does distance from the CBD relate to dwelling prices?
-
-**What We Found**
-
-Listing Activity by Region:
-
-- Some metro regions (e.g., Northern and Western Metro) had a larger share of listings than others. Presenting these as proportions made the comparison clearer, especially for less active regions.
-
-Price Differences by Dwelling Type:
-
-- Houses had the highest prices on average and the widest spread.
-- Units were more affordable and tightly clustered in price.
-- Townhouses sat inbetween.
-
-Price and Distance from the CBD:
-
-- Prices generally decline as distance increases — in a relatively linear way
-
-**What This Helps Us Understand**
-
-These visuals don’t tell us everything, but they provide a starting point for smarter conversations:
-
-- If you're pricing or positioning properties, it's helpful to understand how type and location shape price expectations.
-- Regional variation in listing volume could flag where market activity is strongest — or where supply may be tight. That’s worth exploring further.
-- The price–distance relationship aligns with what we might expect: proximity adds value.
+- **Region panel:** "Listings are concentrated in a handful of regions, and the quietest ones may be quiet because of supply constraints, not weak demand, which is worth investigating before we assume the sales team is fully covering the market."
+- **Type panel:** "Prices are positively skewed and vary enormously by dwelling type, so any pricing guidance we give clients needs to be type-specific, not a single portfolio-wide number."
+- **Distance panel:** "Price falls off with distance from the CBD, so proximity is a genuine premium we can quote clients, although it's not the whole story."
 
 :::
 

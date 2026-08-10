@@ -1,6 +1,8 @@
 <!-- question-type: prepare -->
 ### Exercise 3: The Price - Distance Relationship
 
+This is the third and final panel: it tackles the Head of Residential Sales's last question, whether distance from the CBD explains the price differences you're seeing.
+
 By the end of this exercise, your plot should look similar to this one:
 
 ```{r}

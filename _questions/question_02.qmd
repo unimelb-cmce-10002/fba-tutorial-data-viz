@@ -1,6 +1,8 @@
 <!-- question-type: prepare -->
 ### Exercise 2: Visualizing the distribution of Prices by Dwelling Type
 
+This is the second panel for the briefing: it answers the Head of Residential Sales's question of what prices look like across property types.
+
 By the end of this exercise, your plot should look similar to this one:
 
 ```{r}

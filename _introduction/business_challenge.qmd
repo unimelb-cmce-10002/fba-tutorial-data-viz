@@ -2,6 +2,7 @@
 
 ```{r}
 #| warning: false
+#| eval: true
 #| echo: false
 library(tidyverse)  # for plotting, includes ggplot
 library(patchwork)  # for combining multiple plots into subfigures
@@ -30,11 +31,17 @@ if (!file.exists(destfile)) {
 housing <- read_csv(destfile)
 ```
 
-### The Topic: Understanding Melbourne’s Housing Market {.unnumbered}
+### The Topic: Briefing the Sales Team at Ferg and Deer Property Advisory {.unnumbered}
 
-Melbourne’s real estate market is one of the most dynamic in Australia. Property prices are influenced by several factors, including location, dwelling type, and proximity to the Central Business District (CBD). Buyers, sellers, and policymakers constantly analyze housing trends to make informed decisions. Understanding these trends is crucial in a $2 trillion+ housing market, where even small fluctuations in pricing expectations can have significant financial impacts.
+You are a junior analyst on the Market Intelligence team at Ferg and Deer Property Advisory, a real estate advisory firm operating across Melbourne. Melbourne's real estate market is one of the most dynamic in Australia, and even small shifts in pricing expectations matter in a $2 trillion+ market. Ahead of next quarter's sales push, the Head of Residential Sales has asked your team for a one-page visual briefing: something an agent can glance at before a client meeting, and something an investor can use to sanity-check their assumptions.
 
-A key question we will explore is: How do property prices vary by region, dwelling type, and location? By analyzing real estate data, we can identify patterns that help explain the drivers of Melbourne’s housing prices and their implications for different stakeholders in the market.
+She has three specific questions, and wants one chart to answer each:
+
+1. **Where is market activity concentrated?** Which regions have the most listings? This could inform where the sales team should direct their focus.
+2. **What do prices look like across property types?** How do Houses, Townhouses, and Units compare, and what does that imply about who can afford what?
+3. **Does location explain the price differences?** How does proximity to the CBD affect property prices?
+
+Over this tutorial, you'll build one chart to answer each question, polish each one so it's ready to put in front of the Head of Residential Sales, and then assemble all three into the single one-page briefing she asked for.
 
 ### The Data: The Melbourne Housing Market Dataset {.unnumbered}
 
@@ -51,7 +58,9 @@ Just a few lines of R code transform numbers to data visualizations.
 From this:
 
 ```{r}
-#| echo: false 
+#| eval: true
+#| echo: false
+
 housing %>%
     select(type, address, postcode, price, distance, regionname) %>%
     head(10)
@@ -60,12 +69,13 @@ housing %>%
 to this:
 
 ```{r}
+#| eval: true
 #| fig-width: 7
 #| fig-height: 7
 #| fig-align: "center"
 #| echo: false
 
-price_hist <- 
+price_hist <-
     ggplot(housing,
            aes(x = price, fill = type)
            ) +
@@ -152,11 +162,13 @@ region_bar <-
     )
 
 
-# Bringing together 
+# Bringing together
 price_hist /    (region_bar | scttr)  & theme(legend.position = "none")
 
 
 ```
+
+This is the finished one-pager you're building towards: one panel for each of the Head of Residential Sales's three questions, assembled into a single briefing.
 
 ## Loading the Data
 

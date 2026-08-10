@@ -7,6 +7,8 @@
 
 **(c).** Implement the changes suggested in the R.
 
+**(d)** What's the key takeaway from this panel? In a sentence or two, what does it tell the Head of Residential Sales about the relationship between price and distance to the CBD?
+
 <!-- BEGIN PROFILE:r-teaching-guide -->
 ::: {.content-visible when-profile="r-teaching-guide"}
 
@@ -18,21 +20,25 @@ Teaching Note
 
 ::: {.teaching-block-body}
 
-🎯 **Learning Objective** 
+🎯 **Learning Objective**
 Students should:
 
 - Evaluate and improve a basic scatter plot via aesthetic improvements
+- State the price-distance relationship descriptively, without overclaiming that distance causes lower prices
 
 ✅   **Core Concepts to Highlight**
 
 - aesthetic improvements can improve readabiity of the plot as much as analytical ones
+- This scatter shows an association, not a causal effect — the same caution flagged in Exercise 3 applies here when students write their part (d) takeaway
 
 💬 **Suggested In-Class Prompts** (if needed)
 
+"What's the difference between saying 'prices are lower further from the CBD' and saying 'distance causes lower prices'?"
 
 📌 **Common Misunderstandings**
 
 - Confusing aesthetic improvements (e.g., color, centered title) with analytical ones — both matter, but for different reasons
+- Students may overclaim causality in their part (d) takeaway (e.g. "distance causes lower prices" rather than "is associated with lower prices")
 :::
 
 :::
@@ -126,6 +132,7 @@ scttr <-
 scttr
 ```
 
+**(d)** Prices decline as distance from the CBD increases, in a broadly linear pattern, though there's substantial scatter at every distance. This supports charging a location premium for inner-city listings, but distance alone won't explain any single property's price.
 
 :::
 
