@@ -110,7 +110,7 @@ region_bar <-
     labs(
         x = "Region", 
         y = "Proportion of Listings",  # Note: this is technically a proportion, not % format
-        title = "Number of Listings by Region"
+        title = "Proportion of Listings by Region"
     ) +
   # 5. Tweak the theme for better readability and presentation
     scale_y_continuous(labels = scales::percent) +
