@@ -110,7 +110,6 @@ NA
 - Confusing bar plots with histograms (especially when faceted or filled)
 - Thinking `fill = type` adds numerical grouping, not realizing it’s visual only unless grouped/faceted
 - Histograms in R can combine two variables in faceted plots: `x = numeric`, `facet = categorical`
-- Interpreting y-axis height as absolute frequency in faceted histograms (it's within-facet density)
 
 :::
 
